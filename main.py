@@ -3,8 +3,10 @@ def total_salary(path):
         with open(path, 'r', encoding='utf-8') as file:
 
             salaries_sum = 0
-
-            for line in file:
+            lines = file.readlines()
+            number_of_lines = len(lines)
+            
+            for line in lines:
 
                 try:
                     name, salary = line.strip().split(',')
@@ -13,8 +15,12 @@ def total_salary(path):
                 except ValueError:
                     print("Помилка при обробці рядка")
                     continue
-
-            average_salary = salaries_sum / 3
+            
+            if number_of_lines > 0:
+                average_salary = salaries_sum / number_of_lines
+            else:
+                average_salary = -1
+                salaries_sum = -1
 
             return salaries_sum, average_salary
 
